@@ -4,6 +4,7 @@ const port = 4000;
 const dbConnection = require('./db/dbConfig');
 const userRoutes = require("./routes/userRoute");
 
+app.use(express.json());
 app.use("/api/users", userRoutes);
 
 async function start(){
