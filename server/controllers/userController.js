@@ -26,7 +26,23 @@ async function register(req, res){
     }
 }
 async function login(req, res){
-    res.send("login");
+    const {email, password} = req.body;
+    if(!email || !password){
+        return res.status(400).json({msg: "Please enter all required fields."});
+    }
+    try {
+        const [user] = await dbConnection.query("SELECT username, userid, password FROM users WHERE email = ?", [email]);
+        if(user == 0){
+            return res.status(401).json({msg: "Invalid email or password."});
+        }
+        const isMatch = await bcrypt.compare(password, user[0].password);
+        if(!isMatch){
+            return res.status(401).json({msg: "Invalid email or password."});
+        }
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({msg: "Something went wrong."});
+    }
 }
 async function checkUser(req, res){
     res.send("checkUser");
