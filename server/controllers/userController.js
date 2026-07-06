@@ -1,5 +1,6 @@
 const dbConnection = require('../db/dbConfig');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 async function register(req, res){
     const {username, firstname, lastname, email, password} = req.body;
@@ -39,6 +40,10 @@ async function login(req, res){
         if(!isMatch){
             return res.status(401).json({msg: "Invalid email or password."});
         }
+        const username = user[0].username;
+        const userid = user[0].userid;
+        const token = jwt.sign({username, userid}, "secret", {expiresIn: "1d"});
+        return res.status(200).json({msg: "User login successful", token});
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({msg: "Something went wrong."});
