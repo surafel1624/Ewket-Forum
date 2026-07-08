@@ -50,7 +50,9 @@ async function login(req, res){
     }
 }
 async function checkUser(req, res){
-    res.send("checkUser");
+    const {username, userid} = req.user;
+
+    res.status(200).json({msg: "Valid user", username, userid});
 }
 
 module.exports = {register, login, checkUser};

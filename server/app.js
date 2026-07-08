@@ -2,10 +2,13 @@ const express = require('express');
 const app = express();
 const port = 4000;
 const dbConnection = require('./db/dbConfig');
-const userRoutes = require("./routes/userRoute");
+const userRoutes = require('./routes/userRoute');
+const questionRoutes = require('./routes/questionRoute');
+const authMiddleware = require('./middlewares/auth');
 
 app.use(express.json());
 app.use("/api/users", userRoutes);
+app.use("/api/questions", authMiddleware, questionRoutes);
 
 async function start(){
     try{
