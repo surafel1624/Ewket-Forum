@@ -1,11 +1,11 @@
 const mysql2 = require("mysql2");
 
 const dbConnection = mysql2.createPool({
-    user: "root",
-    database: "ewket_forum",
-    host: "localhost",
-    password: "",
-    connectionLimit: 10
+    user: process.env.DB_USER,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT) || 10
 });
 
 module.exports = dbConnection.promise();
