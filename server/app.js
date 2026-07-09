@@ -7,7 +7,9 @@ const dbConnection = require('./db/dbConfig');
 const userRoutes = require('./routes/userRoute');
 const questionRoutes = require('./routes/questionRoute');
 const authMiddleware = require('./middlewares/auth');
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/questions", authMiddleware, questionRoutes);
