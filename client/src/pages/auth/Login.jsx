@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../API/axios';
 
 function Login() {
@@ -22,8 +22,7 @@ function Login() {
       });
       alert("Successfully logged in.");
       localStorage.setItem('token', data.token);
-      // navigate('/');
-      console.log(data);
+      navigate('/');
     } catch (error) {
       alert(error?.response?.data?.msg);
     }
@@ -42,6 +41,7 @@ function Login() {
           <input ref={passwordDom} type="password" placeholder="Password" required/>
         </div>
         <button type='submit'>Login</button>
+        <Link to={"/register"}>Register</Link>
       </form>
     </section>
   )

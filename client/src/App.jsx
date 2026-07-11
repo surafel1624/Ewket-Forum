@@ -1,18 +1,41 @@
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, useNavigate} from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import { createContext, useEffect, useState } from "react";
+import axios from "./API/axios";
+
+export const AppState = createContext();
 
 function App() {
+  const [user, setUser] = useState({})
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate()
+  async function userCheck(){
+    try {
+      const {data} = await axios.get('/users/check', {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      });
+      setUser(data);
+    } catch (error) {
+      console.log(error.response.data.msg);
+      navigate("/login");
+    }
+  }
+  useEffect(()=>{
+    userCheck();
+  }, []);
 
   return (
-    <>
+    <AppState.Provider value={{user, setUser}}>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
     </Routes>
-    </>
+    </AppState.Provider>
   )
 }
 

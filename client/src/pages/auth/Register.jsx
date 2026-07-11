@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../API/axios';
 
 function Register() {
@@ -63,6 +63,7 @@ function Register() {
           <input ref={passwordDom} type="password" placeholder="Password" required/>
         </div>
         <button type='submit'>Register</button>
+        <Link to={"/login"}>Login</Link>
       </form>
     </section>
   )
