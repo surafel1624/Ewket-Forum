@@ -17,7 +17,7 @@ function Register() {
     const lastnameValue = lastNameDom.current.value;
     const emailValue = emailDom.current.value;
     const passwordValue = passwordDom.current.value;
-    if(!usernameValue || !firstnameValue || !lastnameValue || !emailValue || !passwordValue || !passwordValue){
+    if(!usernameValue || !firstnameValue || !lastnameValue || !emailValue || !passwordValue){
       alert("Please provide all required information.");
       return;
     }
@@ -32,8 +32,7 @@ function Register() {
       alert("Successfully registered. Please login.");
       navigate('/login');
     } catch (error) {
-      alert("Something went wrong!");
-      console.log(error.response);
+      alert(error?.response?.data?.msg);
     }
   }
   return (
