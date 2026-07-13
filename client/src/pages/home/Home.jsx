@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AppState } from '../../App';
+import Logout from './Logout';
 
 function Home() {
   const {user} = useContext(AppState);
@@ -18,6 +19,7 @@ function Home() {
       <h1>Home</h1>
       <br />
       <h2>Wellcome, {user.username}</h2>
+      <Logout/>
     </div>
   )
 }
