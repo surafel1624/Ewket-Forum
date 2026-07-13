@@ -8,9 +8,9 @@ import axios from "./API/axios";
 export const AppState = createContext();
 
 function App() {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
   const token = localStorage.getItem("token");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   async function userCheck(){
     try {
       const {data} = await axios.get('/users/check', {

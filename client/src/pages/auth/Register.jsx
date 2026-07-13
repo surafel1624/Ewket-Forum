@@ -1,66 +1,74 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../API/axios';
 
 function Register() {
   const navigate = useNavigate();
-  const userNameDom = useRef(null);
-  const firstNameDom = useRef(null);
-  const lastNameDom = useRef(null);
-  const emailDom = useRef(null);
-  const passwordDom = useRef(null);
+  const [formData, setFormData] = useState({
+    username: '',
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData((prev) => ({
+      ...prev, [name]: value
+    }));
+    if(error) setError('');
+  };
 
   async function handleSubmit(e){
     e.preventDefault();
-    const usernameValue = userNameDom.current.value;
-    const firstnameValue = firstNameDom.current.value;
-    const lastnameValue = lastNameDom.current.value;
-    const emailValue = emailDom.current.value;
-    const passwordValue = passwordDom.current.value;
-    if(!usernameValue || !firstnameValue || !lastnameValue || !emailValue || !passwordValue){
-      alert("Please provide all required information.");
+    const {username, firstname, lastname, email, password} = formData;
+    if(!username || !firstname || !lastname || !email || !password){
+      setError("Please provide all required information.");
       return;
     }
     try {
       await axios.post('/users/register', {
-        username: usernameValue,
-        firstname: firstnameValue,
-        lastname: lastnameValue,
-        email: emailValue,
-        password: passwordValue
+        username,
+        firstname,
+        lastname,
+        email,
+        password
       });
-      alert("Successfully registered. Please login.");
+      sessionStorage.setItem('flashMessage', "You are successfully registered. Please login.")
       navigate('/login');
     } catch (error) {
-      alert(error?.response?.data?.msg);
+      setError(error?.response?.data?.msg || "Something went wrong.");
     }
   }
   return (
     <section>
       <form onSubmit={handleSubmit}>
+        {error && <div style={{color: 'red', marginBottom: '10px'}}>{error}</div>}
         <div>
           <span>Username: </span>
-          <input ref={userNameDom} type="text" placeholder="Username" required/>
+          <input type="text" name='username' value={formData.username} onChange={handleChange} placeholder="Username" required/>
         </div>
         <br />
         <div>
           <span>First name: </span>
-          <input ref={firstNameDom} type="text" placeholder="First name" required/>
+          <input type="text" name='firstname' value={formData.firstname} onChange={handleChange} placeholder="First name" required/>
         </div>
         <br />
         <div>
           <span>Last name: </span>
-          <input ref={lastNameDom} type="text" placeholder="Last name" required/>
+          <input type="text" name='lastname' value={formData.lastname} onChange={handleChange} placeholder="Last name" required/>
         </div>
         <br />
         <div>
           <span>Email: </span>
-          <input ref={emailDom} type="email" placeholder="Email" required/>
+          <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Email" required/>
         </div>
         <br />
         <div>
           <span>Password: </span>
-          <input ref={passwordDom} type="password" placeholder="Password" required/>
+          <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Password" required/>
         </div>
         <button type='submit'>Register</button>
         <Link to={"/login"}>Login</Link>
