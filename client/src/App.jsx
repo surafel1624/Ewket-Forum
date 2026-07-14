@@ -9,18 +9,23 @@ export const AppState = createContext();
 
 function App() {
   const [user, setUser] = useState({});
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   async function userCheck(){
+    const currentToken = localStorage.getItem("token");
+    if(!currentToken){
+      setUser(null);
+      return;
+    }
     try {
       const {data} = await axios.get('/users/check', {
         headers: {
-          Authorization: 'Bearer ' + token
+          Authorization: 'Bearer ' + currentToken
         }
       });
       setUser(data);
     } catch (error) {
       console.log(error.response.data.msg);
+      localStorage.removeItem("token");
       navigate("/login");
     }
   }
@@ -29,7 +34,7 @@ function App() {
   }, []);
 
   return (
-    <AppState.Provider value={{user, setUser}}>
+    <AppState.Provider value={{user, setUser, userCheck}}>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />

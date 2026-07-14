@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../API/axios';
+import { AppState } from '../../App';
 
 function Login() {
   const navigate = useNavigate();
+  const {userCheck} = useContext(AppState);
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -17,7 +19,7 @@ function Login() {
       setMessage(savedMessage);
       sessionStorage.removeItem('flashMessage');
     }
-  })
+  }, []);
   const handleChange = (e) => {
     const {name, value} = e.target;
     setFormData((prev) =>({
@@ -39,7 +41,8 @@ function Login() {
         password
       });
       localStorage.setItem('token', data.token);
-      sessionStorage.setItem('flashMessage', "Successfully logged in.")
+      sessionStorage.setItem('flashMessage', "Successfully logged in.");
+      await userCheck();
       navigate('/');
     } catch (error) {
       setError(error?.response?.data?.msg || "Something went wrong.");
