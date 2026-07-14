@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AppState } from '../../App';
-import Logout from './Logout';
-import { useNavigate } from 'react-router-dom';
+import Header from '../../components/Header/Header';
+import { Link, useNavigate } from 'react-router-dom';
+import AllQuestion from '../../components/question/AllQuestion';
 
 function Home() {
   const {user} = useContext(AppState);
@@ -20,11 +21,15 @@ function Home() {
   }, [user, navigate]);
   return (
     <div>
+      <Header />
+      <br />
+      <br />
       {message && (<div style={{padding: '10px', backgroundColor: '#d4edda', color: '#155724', marginBottom: '20px', borderRadius: '4px'}}>{message}</div>)}
       <h1>Home</h1>
+      <AllQuestion/>
       <br />
       <h2>Wellcome, {user?.username}</h2>
-      <Logout/>
+      <Link to="/ask">Ask</Link>
     </div>
   )
 }
