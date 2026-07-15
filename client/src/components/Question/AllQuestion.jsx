@@ -54,9 +54,6 @@ function AllQuestion() {
           {questions.map((q) => (
             <div key={q.questionid} onClick={() => navigate(`/question/${q.questionid}`)} style={{cursor: "pointer"}}>
               <h4 className={classes.questionTitle}>{q.title}</h4>
-              {/* <p className={classes.questionDescription}>
-                {(q.description || "").length > 150 ? q.description.substring(0, 150) + "..." : (q.description || "No description provided.")}
-              </p> */}
               <span>Asked by: <strong>{q.username}</strong></span>
             </div>
           ))}

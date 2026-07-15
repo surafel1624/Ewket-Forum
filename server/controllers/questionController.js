@@ -1,4 +1,3 @@
-// const { use, useId } = require("react");
 const dbConnection = require("../db/dbConfig");
 const crypto = require("crypto");
 
@@ -25,7 +24,6 @@ async function answer(req, res){
    const userId = req.user?.userid;
 
    if(!answer || !questionid){
-    // return res.status(400).json({msg: "Please provide all required information."});
     return res.status(400).json({ msg: "Please provide your answer and the question reference." });
    }
    if(!userId){
