@@ -6,6 +6,7 @@ import { createContext, useEffect, useState } from "react";
 import axios from "./API/axios";
 import Ask from "./pages/ask/Ask";
 import AllQuestion from "./components/question/AllQuestion";
+import Question from "./components/Question/Question";
 
 export const AppState = createContext();
 
@@ -43,6 +44,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path="/ask" element={<Ask />} />
       <Route path="/question" element={<AllQuestion />} />
+      <Route path="/question/:questionid" element={<Question />} />
     </Routes>
     </AppState.Provider>
   )

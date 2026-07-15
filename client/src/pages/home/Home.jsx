@@ -22,14 +22,14 @@ function Home() {
   return (
     <div>
       <Header />
+      <h2>Wellcome, {user?.username}</h2>
+      <Link to="/ask">Ask</Link>
       <br />
       <br />
       {message && (<div style={{padding: '10px', backgroundColor: '#d4edda', color: '#155724', marginBottom: '20px', borderRadius: '4px'}}>{message}</div>)}
       <h1>Home</h1>
       <AllQuestion/>
       <br />
-      <h2>Wellcome, {user?.username}</h2>
-      <Link to="/ask">Ask</Link>
     </div>
   )
 }
