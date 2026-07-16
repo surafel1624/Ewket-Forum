@@ -1,0 +1,96 @@
+/* Ensure inputs take up full container width instead of collapsing */
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.tipsCard {
+  background-color: #f8f9fa;
+  border-left: 5px solid #f47e20;
+  padding: 15px 20px;
+  border-radius: 4px;
+  margin-bottom: 25px;
+}
+
+.tipsCard h3 {
+  margin-top: 0;
+  color: #2b3a4a;
+}
+
+.formCard {
+  background: white;
+  border: 1px solid #e9ecef;
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.formTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2b3a4a;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup input[type="text"],
+.formGroup textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #f47e20;
+}
+
+.actions {
+  display: flex;
+  gap: 15px;
+}
+
+.submitBtn {
+  background-color: #2b3a4a;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background-color: #f47e20;
+}
+
+.submitBtn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid #ced4da;
+  color: #6c757d;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
