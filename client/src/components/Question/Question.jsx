@@ -58,37 +58,76 @@ function Question() {
       setSubmitting(false);
     }
   };
-  if(loading) return <div>Loading question details...</div>;
-  if(!question) return <div>Question not found.</div>;
-  return (
-  <div className={classes.container}>
-    <button className={classes.backBtn} onClick={() => navigate(-1)}>Back to feed</button>
-    <section className={question}>
-      <h2>{question.title}</h2>
-      <p>{question.description || "No content provided."}</p>
-      <div><strong>{question.username}</strong></div>
-    </section>
-    <hr />
-    <section className={classes.answer}>
-      <h3>Answer ({answer.length})</h3>
-      {answer.length === 0? (
-        <p className={classes.noResponse}>No responses yet. Be the first to share your thoughts!</p>
-      ) : (
-        <div className={classes.answerList}>
-          {answer.map((ans, idx) =>(
-            <div key={idx}>
-              <p>{ans.answer}</p>
-              <span>Answered by: <strong>{ans.username}</strong></span>
-            </div>
-          ))}
+  if(loading){
+    return (
+      <div className={classes.centerState}>
+        <div className={classes.spinner}>
+          <p>Loading question details...</p>
         </div>
-      )}
-    </section>
+      </div>
+    );
+  }
+  if(!question){
+    return (
+      <div className={classes.centerState}>
+        <p className={classes.errorText}>Question not found.</p>
+        <button className={classes.backBtn} onClick={() => navigate(-1)}>Return to feed</button>
+      </div>
+    )
+  }
+  return (
+  <div className={classes.detailContainer}>
+    <button className={classes.backBtn} onClick={() => navigate(-1)}>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to feed
+    </button>
+    <article className={classes.maniQuestionCard}>
+      <div className={classes.questionHeader}>
+        <div className={classes.userBadgeRow}>
+          <div className={classes.userAvatarCircle}>{question.username ? question.username.charAt(0).toUpperCase() : '?'}</div>
+          <span className={classes.authorName}>{question.username}</span>
+        </div>
+        <h2 className={classes.detailTitle}>{question.title}</h2>
+      </div>
+      <div className={classes.questionBody}>
+        <p>{question.description || "No content provided."}</p>
+      </div>
+    </article>
+    <hr />
+    <div className={classes.answer}>
+      <section className={classes.answerSection}>
+        <h3 className={classes.sectionTitle}>Answer <span className={classes.answerCountBubble}>{answer.length}</span></h3>
+        {answer.length === 0? (
+          <div className={classes.emptyResponseCard}>
+            <p className={classes.noResponse}>No responses yet. Be the first to share your thoughts!</p>
+          </div>
+        ) : (
+          <div className={classes.answerList}>
+            {answer.map((ans, idx) =>(
+              <div key={idx} className={classes.answerCard}>
+                <div className={classes.answerHeader}>
+                  <div className={classes.miniAvatar}>{ans.username ? ans.username.charAt(0).toUpperCase() : '?'}</div>
+                  <span>Answered by: <strong>{ans.username}</strong></span>
+                </div>
+                <div className={classes.answerBody}>
+                  <p>{ans.answer}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
+    </div>
     <section className={classes.postAnswer}>
-      <h4>Your Answer</h4>
-      <form onSubmit={handleAnswerSubmit}>
+      <h4 className={classes.workspaceTitle}>Your Answer</h4>
+      <form onSubmit={handleAnswerSubmit} className={classes.answerForm}>
         <textarea rows={5} value={newAnswer} onChange={(e) => setNewAnswer(e.target.value)} placeholder='Type your answer cleanly here...' required />
-          <button type='submit' disabled={submitting} >{submitting ? "Posting..." : "Post Answer"}</button>
+          <div className={classes.formActions}>
+            <button type='submit' className={classes.submitReplyBtn} disabled={submitting} >{submitting ? "Posting..." : "Post Answer"}</button>
+          </div>
       </form>
     </section>
   </div>

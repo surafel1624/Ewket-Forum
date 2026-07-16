@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import classes from './Question.module.css';
+import classes from './AllQuestion.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppState } from '../../App';
 import axios from '../../API/axios';

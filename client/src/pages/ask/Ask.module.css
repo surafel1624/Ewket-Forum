@@ -7,7 +7,7 @@
 
 .tipsCard {
   background-color: #f8f9fa;
-  border-left: 5px solid #f47e20;
+  border-left: 5px solid #4338ca;
   padding: 15px 20px;
   border-radius: 4px;
   margin-bottom: 25px;
@@ -50,7 +50,7 @@
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: none;
-  border-color: #f47e20;
+  border-color: #4338ca;
 }
 
 .actions {
@@ -71,7 +71,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background-color: #f47e20;
+  background-color: #4338ca;
 }
 
 .submitBtn:disabled {
