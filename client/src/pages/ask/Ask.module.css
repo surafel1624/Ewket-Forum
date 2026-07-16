@@ -1,95 +1,177 @@
 .container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: sans-serif;
+  --text-main: #0f172a;
+  --text-sub: #475569;
+  --text-muted: #94a3b8;
+  --accent: #4338ca; 
+  --accent-light: #e6e5ff;
+  --info-bg: #f0fdf4;
+  --info-border: #bbf7d0;
+  --info-text: #166534;
+  --border-color: #e2e8f0;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --radius: 12px;
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
 }
 
 .tipsCard {
-  background-color: #f8f9fa;
+  background-color: var(--info-bg);
+  border: 1px solid var(--info-border);
   border-left: 5px solid #4338ca;
-  padding: 15px 20px;
-  border-radius: 4px;
-  margin-bottom: 25px;
+  border-radius: var(--radius);
+  padding: 24px;
+  color: var(--info-text);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .tipsCard h3 {
-  margin-top: 0;
+  margin: 0 0 12px 0;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: #2b3a4a;
 }
 
+.tipsCard ol {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tipsCard li {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #15803d;
+}
+
+
 .formCard {
-  background: white;
-  border: 1px solid #e9ecef;
-  padding: 25px;
-  border-radius: 8px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .formTitle {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #2b3a4a;
-  margin-top: 0;
-  margin-bottom: 20px;
+  font-weight: 800;
+  color: var(--text-main);
+  margin: 0 0 24px 0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: -0.02em;
 }
 
 .formGroup {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
-.formGroup input[type="text"],
+.formGroup input,
 .formGroup textarea {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  background-color: var(--bg-color);
+  color: var(--text-main);
   box-sizing: border-box;
+  transition: var(--transition);
+}
+
+.formGroup textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+  color: var(--text-muted);
 }
 
 .formGroup input:focus,
 .formGroup textarea:focus {
   outline: none;
-  border-color: #4338ca;
+  background-color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-light);
 }
 
 .actions {
   display: flex;
-  gap: 15px;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
 }
 
 .submitBtn {
-  background-color: #2b3a4a;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  font-size: 1rem;
+  background-color: var(--text-main);
+  color: #ffffff;
   font-weight: 600;
-  border-radius: 6px;
+  font-size: 0.95rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: var(--transition);
 }
 
 .submitBtn:hover:not(:disabled) {
-  background-color: #4338ca;
+  background-color: #1e293b;
+  transform: translateY(-1px);
+}
+
+.submitBtn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .submitBtn:disabled {
-  background-color: #cccccc;
+  background-color: var(--border-color);
+  color: var(--text-muted);
   cursor: not-allowed;
 }
 
 .cancelBtn {
-  background: transparent;
-  border: 1px solid #ced4da;
-  color: #6c757d;
+  background-color: rgba(0, 0, 0, 0.170);
+  color: black;
+  font-weight: 600;
+  font-size: 0.95rem;
   padding: 12px 24px;
-  font-size: 1rem;
-  border-radius: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
+  transition: var(--transition);
 }
 
 .cancelBtn:hover {
-  background-color: #f8f9fa;
-  color: #333;
+  background-color: rgba(0, 0, 0, 0.116);
+  color: var(--text-main);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 32px 24px;
+    gap: 32px;
+  }
+  
+  .tipsCard {
+    padding: 32px;
+  }
+
+  .formCard {
+    padding: 32px;
+  }
 }

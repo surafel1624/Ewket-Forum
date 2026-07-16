@@ -69,14 +69,12 @@ function Ask() {
             <li>Review your question and post it to the community.</li>
         </ol>
       </div>
-      <br />
       <div className={classes.formCard}>
         <p className={classes.formTitle}>Post your question</p>
         <form onSubmit={handleSubmit}>
           <div className={classes.formGroup}>
             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Question title' required/>
           </div>
-          <br />
           <div className={classes.formGroup}>
             <textarea rows={7} cols={47} value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Question description' required></textarea>
           </div>
