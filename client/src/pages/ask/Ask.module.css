@@ -1,4 +1,3 @@
-/* Ensure inputs take up full container width instead of collapsing */
 .container {
   max-width: 800px;
   margin: 40px auto;
