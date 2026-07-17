@@ -3,7 +3,7 @@
 A sleek, production-grade, full-stack Q&A platform designed specifically for tech professionals and students to share knowledge, debug code, and discuss software architecture. Built with React, this platform offers a pixel-perfect, highly responsive user experience combined with robust state management and security features.
 
 ### 🔗 Quick Links
-- [Live Demo](https://ewket_forum.netlify.app)
+- [Live Demo](https://ewketforum.netlify.app)
 - [Backend Repository](https://github.com/surafel1624/Ewket-Forum/tree/main/server)
 
 ---
