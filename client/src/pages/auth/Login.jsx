@@ -57,7 +57,7 @@ function Login() {
         <div className={classes.header}>
           <img src={Ewket_Forum} alt="Ewket forum" className={classes.logo} />
           <h1 className={classes.title}>Welcome back</h1>
-          <p className={classes.subtitle}>Sing in to your account to continue</p>
+          <p className={classes.subtitle}>Sign in to your account to continue</p>
         </div>
         <form onSubmit={handleSubmit} className={classes.form}>
           {error && <div className={classes.errorMessage}>{error}</div>}

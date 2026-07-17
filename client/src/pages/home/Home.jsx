@@ -58,7 +58,7 @@ function Home() {
               <circle cx="11" cy="11" r="8"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
-            <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Search for questioins, tags or topics...' className={classes.searchInput} />
+            <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Search for questions, tags or topics...' className={classes.searchInput} />
             <kbd className={classes.hotkey}>⌘ K</kbd>
           </div>
         </section>
