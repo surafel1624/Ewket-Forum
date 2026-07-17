@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from '../../API/axios';
 import { AppState } from '../../App';
+import classes from './Login.module.css';
+import Ewket_Forum from '../../assets/ewket_forum_logo.png';
 
 function Login() {
   const navigate = useNavigate();
@@ -50,22 +52,30 @@ function Login() {
   }
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        {error && <div style={{color: 'red', marginBottom: '10px'}}>{error}</div>}
-        {message && (<div style={{padding: '10px', backgroundColor: '#d4edda', color: '#155724', marginBottom: '20px', borderRadius: '4px'}}>{message}</div>)}
-        <div>
-          <span>Email: </span>
-          <input type="email" name='email' value={formData.email} onChange={handleChange} placeholder="Email" required/>
+    <section className={classes.pageWrapper}>
+      <div className={classes.authCard}>
+        <div className={classes.header}>
+          <img src={Ewket_Forum} alt="Ewket forum" className={classes.logo} />
+          <h1 className={classes.title}>Welcome back</h1>
+          <p className={classes.subtitle}>Sing in to your account to continue</p>
         </div>
-        <br />
-        <div>
-          <span>Password: </span>
-          <input type="password" name='password' value={formData.password} onChange={handleChange} placeholder="Password" required/>
+        <form onSubmit={handleSubmit} className={classes.form}>
+          {error && <div className={classes.errorMessage}>{error}</div>}
+          {message && (<div className={classes.successMessage}>{message}</div>)}
+          <div className={classes.inputGroup}>
+            <label htmlFor='email' className={classes.label}>Email Address</label>
+            <input type="email" name='email' id='email' className={classes.input} value={formData.email} onChange={handleChange} placeholder="someone@example.com" required/>
+          </div>
+          <div className={classes.inputGroup}>
+            <label htmlFor='password' className={classes.label}>Password</label>
+            <input type="password" name='password' id='password' className={classes.input} value={formData.password} onChange={handleChange} placeholder="********" required/>
+          </div>
+          <button type='submit' className={classes.submitBtn}>Login</button>
+        </form>
+        <div className={classes.footer}>
+          <p className={classes.footerText}>Don't have an account?{' '}<Link to={"/register"} className={classes.signupLink}>Register</Link></p>
         </div>
-        <button type='submit'>Login</button>
-        <Link to={"/register"}>Register</Link>
-      </form>
+      </div>
     </section>
   )
 }
