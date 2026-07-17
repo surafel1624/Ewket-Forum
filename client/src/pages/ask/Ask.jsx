@@ -73,10 +73,12 @@ function Ask() {
         <p className={classes.formTitle}>Post your question</p>
         <form onSubmit={handleSubmit}>
           <div className={classes.formGroup}>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Question title' required/>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Question title' maxLength={150} required/>
+            <span className={classes.counter}>{title.length} / 150 Characters</span>
           </div>
           <div className={classes.formGroup}>
-            <textarea rows={7} cols={47} value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Question description' required></textarea>
+            <textarea rows={7} cols={47} value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Question description' maxLength={1000} required></textarea>
+            <span className={classes.counter}>{description.length} / 1000 Characters</span>
           </div>
           <div className={classes.actions}>
             <button className={classes.submitBtn} type='submit' disabled={submitting}>{submitting ? "Publishing..." : "Post your question"}</button>

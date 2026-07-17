@@ -75,7 +75,18 @@
 }
 
 .formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin-bottom: 16px;
+}
+
+.counter {
+  align-self: flex-end;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-right: 4px;
 }
 
 .formGroup input,

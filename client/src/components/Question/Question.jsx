@@ -13,6 +13,7 @@ function Question() {
   const [newAnswer, setNewAnswer] = useState('');
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() =>{
     if(!user){
@@ -51,6 +52,10 @@ function Question() {
       });
       setAnswer([{answer: newAnswer, username: user.username}, ...answer]);
       setNewAnswer('');
+      setSuccessMessage("Your answer was successfully posted.");
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 5000);
     } catch (error) {
       console.error(error);
       alert("Could not post your answer. Please try again.");
@@ -123,8 +128,20 @@ function Question() {
     </div>
     <section className={classes.postAnswer}>
       <h4 className={classes.workspaceTitle}>Your Answer</h4>
+      {successMessage && (
+        <div className={classes.flashMessage}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          {successMessage}
+        </div>
+      )}
       <form onSubmit={handleAnswerSubmit} className={classes.answerForm}>
-        <textarea rows={5} value={newAnswer} onChange={(e) => setNewAnswer(e.target.value)} placeholder='Type your answer cleanly here...' required />
+          <div className={classes.formGroup}>
+            <textarea rows={5} value={newAnswer} onChange={(e) => setNewAnswer(e.target.value)} placeholder='Type your answer cleanly here...' maxLength={1500} required />
+            <span className={classes.counter}>{newAnswer.length} / 1500 Characters</span>
+          </div>
           <div className={classes.formActions}>
             <button type='submit' className={classes.submitReplyBtn} disabled={submitting} >{submitting ? "Posting..." : "Post Answer"}</button>
           </div>
