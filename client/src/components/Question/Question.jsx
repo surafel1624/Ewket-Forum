@@ -3,6 +3,7 @@ import classes from "./Question.module.css";
 import { useNavigate, useParams } from 'react-router-dom';
 import { AppState } from '../../App';
 import axios from '../../API/axios';
+import Header from '../Header/Header';
 
 function Question() {
   const {questionid} = useParams();
@@ -81,73 +82,78 @@ function Question() {
     )
   }
   return (
-  <div className={classes.detailContainer}>
-    <button className={classes.backBtn} onClick={() => navigate(-1)}>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="19" y1="12" x2="5" y2="12"></line>
-        <polyline points="12 19 5 12 12 5"></polyline>
-      </svg>
-      Back to feed
-    </button>
-    <article className={classes.maniQuestionCard}>
-      <div className={classes.questionHeader}>
-        <div className={classes.userBadgeRow}>
-          <div className={classes.userAvatarCircle}>{question.username ? question.username.charAt(0).toUpperCase() : '?'}</div>
-          <span className={classes.authorName}>{question.username}</span>
-        </div>
-        <h2 className={classes.detailTitle}>{question.title}</h2>
-      </div>
-      <div className={classes.questionBody}>
-        <p>{question.description || "No content provided."}</p>
-      </div>
-    </article>
-    <hr />
-    <div className={classes.answer}>
-      <section className={classes.answerSection}>
-        <h3 className={classes.sectionTitle}>Answer <span className={classes.answerCountBubble}>{answer.length}</span></h3>
-        {answer.length === 0? (
-          <div className={classes.emptyResponseCard}>
-            <p className={classes.noResponse}>No responses yet. Be the first to share your thoughts!</p>
+  <>
+    <Header />
+    <div className={classes.detailContainer}>
+      <article className={classes.maniQuestionCard}>
+        <div className={classes.questionHeader}>
+          <div className={classes.userBadgeRow}>
+            <div className={classes.profileCluster}>
+              <div className={classes.userAvatarCircle}>{question.username ? question.username.charAt(0).toUpperCase() : '?'}</div>
+              <span className={classes.authorName}>{question.username}</span>
+            </div>
+            <button className={classes.backBtn} onClick={() => navigate(-1)}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+              Back<span className={classes.backBtnText}> to feed</span>
+            </button>
           </div>
-        ) : (
-          <div className={classes.answerList}>
-            {answer.map((ans, idx) =>(
-              <div key={idx} className={classes.answerCard}>
-                <div className={classes.answerHeader}>
-                  <div className={classes.miniAvatar}>{ans.username ? ans.username.charAt(0).toUpperCase() : '?'}</div>
-                  <span>Answered by: <strong>{ans.username}</strong></span>
+          <h2 className={classes.detailTitle}>{question.title}</h2>
+        </div>
+        <div className={classes.questionBody}>
+          <p>{question.description || "No content provided."}</p>
+        </div>
+      </article>
+      <hr />
+      <div className={classes.answer}>
+        <section className={classes.answerSection}>
+          <h3 className={classes.sectionTitle}>Answer <span className={classes.answerCountBubble}>{answer.length}</span></h3>
+          {answer.length === 0? (
+            <div className={classes.emptyResponseCard}>
+              <p className={classes.noResponse}>No responses yet. Be the first to share your thoughts!</p>
+            </div>
+          ) : (
+            <div className={classes.answerList}>
+              {answer.map((ans, idx) =>(
+                <div key={idx} className={classes.answerCard}>
+                  <div className={classes.answerHeader}>
+                    <div className={classes.miniAvatar}>{ans.username ? ans.username.charAt(0).toUpperCase() : '?'}</div>
+                    <span>Answered by: <strong>{ans.username}</strong></span>
+                  </div>
+                  <div className={classes.answerBody}>
+                    <p>{ans.answer}</p>
+                  </div>
                 </div>
-                <div className={classes.answerBody}>
-                  <p>{ans.answer}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+          )}
+        </section>
+      </div>
+      <section className={classes.postAnswer}>
+        <h4 className={classes.workspaceTitle}>Your Answer</h4>
+        {successMessage && (
+          <div className={classes.flashMessage}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            {successMessage}
           </div>
         )}
+        <form onSubmit={handleAnswerSubmit} className={classes.answerForm}>
+            <div className={classes.formGroup}>
+              <textarea rows={5} value={newAnswer} onChange={(e) => setNewAnswer(e.target.value)} placeholder='Type your answer cleanly here...' maxLength={1500} required />
+              <span className={classes.counter}>{newAnswer.length} / 1500 Characters</span>
+            </div>
+            <div className={classes.formActions}>
+              <button type='submit' className={classes.submitReplyBtn} disabled={submitting} >{submitting ? "Posting..." : "Post Answer"}</button>
+            </div>
+        </form>
       </section>
     </div>
-    <section className={classes.postAnswer}>
-      <h4 className={classes.workspaceTitle}>Your Answer</h4>
-      {successMessage && (
-        <div className={classes.flashMessage}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-          </svg>
-          {successMessage}
-        </div>
-      )}
-      <form onSubmit={handleAnswerSubmit} className={classes.answerForm}>
-          <div className={classes.formGroup}>
-            <textarea rows={5} value={newAnswer} onChange={(e) => setNewAnswer(e.target.value)} placeholder='Type your answer cleanly here...' maxLength={1500} required />
-            <span className={classes.counter}>{newAnswer.length} / 1500 Characters</span>
-          </div>
-          <div className={classes.formActions}>
-            <button type='submit' className={classes.submitReplyBtn} disabled={submitting} >{submitting ? "Posting..." : "Post Answer"}</button>
-          </div>
-      </form>
-    </section>
-  </div>
+  </>
   )
 }
 

@@ -69,26 +69,32 @@
 }
 
 .backBtn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   color: var(--text-sub);
   font-weight: 600;
   font-size: 0.9rem;
-  padding: 10px 16px;
+  padding: 8px;
   border-radius: 8px;
   cursor: pointer;
   width: fit-content;
   transition: var(--transition);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  flex-shrink: 0;
 }
 
 .backBtn:hover {
   color: var(--text-main);
   border-color: var(--text-muted);
   transform: translateX(-4px);
+}
+
+.backBtnText{
+  display: none;
 }
 
 .maniQuestionCard {
@@ -112,6 +118,15 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profileCluster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
 }
 
 .userAvatarCircle {
@@ -125,12 +140,16 @@
   justify-content: center;
   font-weight: 700;
   font-size: 1.1rem;
+  flex-shrink: 0;
 }
 
 .authorName {
   font-weight: 600;
   color: var(--text-main);
   font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .detailTitle {
@@ -356,12 +375,11 @@ hr {
   cursor: not-allowed;
 }
 
-/* Success Flash Message styling */
 .flashMessage {
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #f0fdf4; /* Soft green */
+  background-color: #f0fdf4;
   border: 1px solid #bbf7d0;
   color: #166534;
   padding: 12px 16px;
@@ -391,6 +409,27 @@ hr {
 @media (min-width: 640px) {
   .detailContainer {
     padding: 32px 24px;
+  }
+
+  .userBadgeRow{
+    gap: 16px;
+  }
+
+  .profileCluster{
+    gap: 12px;
+  }
+
+  .authorName{
+    font-size: 1.05rem;
+  }
+
+  .backBtnText{
+    display: inline;
+    font-size: 0.9rem;
+  }
+
+  .backBtn{
+    padding: 10px 16px;
   }
 
   .maniQuestionCard {

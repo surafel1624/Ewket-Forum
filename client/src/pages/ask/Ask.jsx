@@ -3,6 +3,7 @@ import { AppState } from '../../App'
 import { useNavigate } from 'react-router-dom';
 import axios from '../../API/axios';
 import classes from './Ask.module.css';
+import Header from '../../components/Header/Header';
 
 function Ask() {
   const {user, userCheck} = useContext(AppState);
@@ -60,33 +61,36 @@ function Ask() {
     );
   }
   return (
-    <div className={classes.container}>
-      <div className={classes.tipsCard}>
-        <h3>Steps to write a good question.</h3>
-        <ol>
-            <li>Summarize your problem in a clear, one-line title.</li>
-            <li>Describe what you tried and what you expected to happen.</li>
-            <li>Review your question and post it to the community.</li>
-        </ol>
+    <>
+      <Header />
+      <div className={classes.container}>
+        <div className={classes.tipsCard}>
+          <h3>Steps to write a good question.</h3>
+          <ol>
+              <li>Summarize your problem in a clear, one-line title.</li>
+              <li>Describe what you tried and what you expected to happen.</li>
+              <li>Review your question and post it to the community.</li>
+          </ol>
+        </div>
+        <div className={classes.formCard}>
+          <p className={classes.formTitle}>Post your question</p>
+          <form onSubmit={handleSubmit}>
+            <div className={classes.formGroup}>
+              <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Question title' maxLength={150} required/>
+              <span className={classes.counter}>{title.length} / 150 Characters</span>
+            </div>
+            <div className={classes.formGroup}>
+              <textarea rows={7} cols={47} value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Question description' maxLength={1000} required></textarea>
+              <span className={classes.counter}>{description.length} / 1000 Characters</span>
+            </div>
+            <div className={classes.actions}>
+              <button className={classes.submitBtn} type='submit' disabled={submitting}>{submitting ? "Publishing..." : "Post your question"}</button>
+              <button className={classes.cancelBtn} type='button' onClick={() => navigate('/')}>Cancel</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div className={classes.formCard}>
-        <p className={classes.formTitle}>Post your question</p>
-        <form onSubmit={handleSubmit}>
-          <div className={classes.formGroup}>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Question title' maxLength={150} required/>
-            <span className={classes.counter}>{title.length} / 150 Characters</span>
-          </div>
-          <div className={classes.formGroup}>
-            <textarea rows={7} cols={47} value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Question description' maxLength={1000} required></textarea>
-            <span className={classes.counter}>{description.length} / 1000 Characters</span>
-          </div>
-          <div className={classes.actions}>
-            <button className={classes.submitBtn} type='submit' disabled={submitting}>{submitting ? "Publishing..." : "Post your question"}</button>
-            <button className={classes.cancelBtn} type='button' onClick={() => navigate('/')}>Cancel</button>
-          </div>
-        </form>
-      </div>
-    </div>
+    </>
   )
 }
 

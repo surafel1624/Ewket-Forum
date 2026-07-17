@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AppState } from '../../App';
 import { useNavigate } from 'react-router-dom';
+import classes from './Logout.module.css';
 
 function Logout() {
     const navigate = useNavigate();
@@ -13,18 +14,14 @@ function Logout() {
         navigate('/login');
     }
   return (
-    <button
-        onClick={handleLogout}
-        style={{
-            padding: '8px 16px',
-            backgroundColor: '#dc3545',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
-        }}
-    >
-        Logout</button>
+    <button onClick={handleLogout} className={classes.logoutBtn}>
+        <span className={classes.logoutText}>Logout</span>
+        <svg className={classes.logoutIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+      </svg>
+    </button>
   )
 }
 

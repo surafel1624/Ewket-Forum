@@ -1,0 +1,124 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.floatingNav {
+  pointer-events: auto;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 100px;
+  border: 1px solid #4f46e5;
+  box-shadow: 
+    0 10px 25px -5px rgba(0, 0, 0, 0.05),
+    0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  transition: all 0.3s ease;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.logoLink {
+  display: block;
+  text-decoration: none;
+}
+
+.logoImage {
+  height: 60px !important;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+.logoLink:hover .logoImage {
+  transform: scale(1.05);
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 4px;
+}
+
+.profileGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50px;
+  background: rgba(241, 245, 249, 0.4);
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.profileGroup:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.avatarRing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f46e5 0%, #6b66ca 100%);
+  padding: 2px;
+  box-shadow: 0 2px 6px rgba(249, 115, 22, 0.2);
+}
+
+.avatarInner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: rgba(203, 213, 225, 0.6);
+  margin: 0 4px;
+}
+
+.logoutContainer {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .floatingNav {
+    padding: 12px 20px;
+    gap: 16px;
+  }
+  
+  .logoImage {
+    height: 38px;
+  }
+}
