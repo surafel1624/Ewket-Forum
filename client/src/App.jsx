@@ -5,7 +5,7 @@ import Register from "./pages/auth/Register";
 import { createContext, useEffect, useState } from "react";
 import axios from "./API/axios";
 import Ask from "./pages/ask/Ask";
-import AllQuestion from "./components/question/AllQuestion";
+import AllQuestion from "./components/Question/AllQuestion";
 import Question from "./components/Question/Question";
 
 export const AppState = createContext();

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AppState } from '../../App';
 import Header from '../../components/Header/Header';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import AllQuestion from '../../components/question/AllQuestion';
+import AllQuestion from '../../components/Question/AllQuestion';
 import classes from './Home.module.css';
 
 function Home() {

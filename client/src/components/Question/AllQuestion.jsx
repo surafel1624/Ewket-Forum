@@ -41,7 +41,6 @@ function AllQuestion({searchTerm = ""}) {
   }, [user, navigate]);
   return (
     <>
-      <Header />
       <div className={classes.questionsContainer}>
         <header className={classes.feedHeader}>
           <div className={classes.headerTitles}>
@@ -82,7 +81,6 @@ function AllQuestion({searchTerm = ""}) {
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                       </svg>
-                      {/* <span className={classes.arrowIcon}>&rarr;</span> */}
                     </div>
                 </div>
                 );
