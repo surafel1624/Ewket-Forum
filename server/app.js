@@ -12,12 +12,12 @@ const cors = require('cors');
 app.use(cors({origin: ['https://ewketforum.netlify.app', 'http://localhost:5173'], credentials: true}));
 app.use(express.json());
 
-app.get('api/health', async (req, res) => {
+app.get('/api/health', async (req, res) => {
     try {
         await dbConnection.execute("SELECT 1");
         res.status(200).json({status: "UP", message: "Server and Database are healthy."});
     } catch (error) {
-        res.status(500).json({status: "DOWN", error: err.message});
+        res.status(500).json({status: "DOWN", error: error.message});
     }
 });
 
