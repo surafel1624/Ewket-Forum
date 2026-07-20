@@ -9,7 +9,7 @@ const questionRoutes = require('./routes/questionRoute');
 const authMiddleware = require('./middlewares/auth');
 const cors = require('cors');
 
-app.use(cors({origin: 'https://ewketforum.netlify.app/'}));
+app.use(cors({origin: ['https://ewketforum.netlify.app', 'http://localhost:5173'], credentials: true}));
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/questions", authMiddleware, questionRoutes);
