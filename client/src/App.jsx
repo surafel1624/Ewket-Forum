@@ -1,4 +1,4 @@
-import {Routes, Route, useNavigate} from "react-router-dom";
+import {Routes, Route, useNavigate, Outlet} from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -11,6 +11,18 @@ import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 
 export const AppState = createContext();
+
+function MainLayout(){
+  return(
+    <>
+      <Header />
+        <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Outlet />
+        </main>
+      <Footer />
+    </>
+  )
+}
 
 function App() {
   const [user, setUser] = useState({});
@@ -41,18 +53,18 @@ function App() {
   return (
     <AppState.Provider value={{user, setUser, userCheck}}>
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header />
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/ask" element={<Ask />} />
-          <Route path="/question" element={<AllQuestion />} />
-          <Route path="/question/:questionid" element={<Question />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/ask" element={<Ask />} />
+            <Route path="/question" element={<AllQuestion />} />
+            <Route path="/question/:questionid" element={<Question />} />
+          </Route>
         </Routes>
       </main>
-      <Footer />
     </div>
     </AppState.Provider>
   )
