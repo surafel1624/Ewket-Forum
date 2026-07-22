@@ -7,6 +7,8 @@ import axios from "./API/axios";
 import Ask from "./pages/ask/Ask";
 import AllQuestion from "./components/Question/AllQuestion";
 import Question from "./components/Question/Question";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 
 export const AppState = createContext();
 
@@ -38,14 +40,20 @@ function App() {
 
   return (
     <AppState.Provider value={{user, setUser, userCheck}}>
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/ask" element={<Ask />} />
-      <Route path="/question" element={<AllQuestion />} />
-      <Route path="/question/:questionid" element={<Question />} />
-    </Routes>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/ask" element={<Ask />} />
+          <Route path="/question" element={<AllQuestion />} />
+          <Route path="/question/:questionid" element={<Question />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
     </AppState.Provider>
   )
 }

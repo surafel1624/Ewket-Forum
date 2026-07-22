@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AllQuestion from '../../components/Question/AllQuestion';
 import classes from './Home.module.css';
+import Footer from '../../components/Footer/Footer';
 
 function Home() {
   const {user} = useContext(AppState);
@@ -28,7 +29,6 @@ function Home() {
   }, [user, navigate, location]);
   return (
     <>
-      <Header />
       <div className={classes.container}>
         <div className={classes.welcomeRow}>
           <div className={classes.welcomeText}>

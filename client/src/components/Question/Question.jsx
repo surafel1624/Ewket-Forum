@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AppState } from '../../App';
 import axios from '../../API/axios';
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 function Question() {
   const {questionid} = useParams();
@@ -83,7 +84,6 @@ function Question() {
   }
   return (
   <>
-    <Header />
     <div className={classes.detailContainer}>
       <article className={classes.maniQuestionCard}>
         <div className={classes.questionHeader}>

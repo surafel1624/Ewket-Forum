@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from '../../API/axios';
 import classes from './Ask.module.css';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 function Ask() {
   const {user, userCheck} = useContext(AppState);
@@ -62,7 +63,6 @@ function Ask() {
   }
   return (
     <>
-      <Header />
       <div className={classes.container}>
         <div className={classes.tipsCard}>
           <h3>Steps to write a good question.</h3>
